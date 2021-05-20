@@ -34,12 +34,11 @@ public class StartController {
             errorLabel.setText("Enter your name!");
         }
 
-        Parent root = fxmlLoader.load(getClass().getResource("/fxml/game.fxml"));
-        System.out.println(playone.getText());
-        System.out.println(playtwo.getText());
-
-//        fxmlLoader.<GameController>getController().setPlayer1Name(playone.getText());
-//        fxmlLoader.<GameController>getController().setPlayer2Name(playtwo.getText());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game.fxml"));
+        Parent root = loader.load();
+        GameController target = loader.getController();
+        target.setPlayer1Name(playone.getText());
+        target.setPlayer2Name(playtwo.getText());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
