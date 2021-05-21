@@ -2,13 +2,19 @@ package Dao;
 
 import Entity.GameRecord;
 import Util.XmlUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.util.List;
 
 
 public class GameRecordDao {
-    public void InputGameRecord(GameRecord gameRecord) throws JAXBException{
+    public void InputGameRecord(GameRecord gameRecord) throws JsonProcessingException ,IOException {
+        XmlUtil.BeanXml(gameRecord);
+    }
 
-        XmlUtil.marshallerByJaxb( "xml/GameRecord.xml", gameRecord);
+    public List<GameRecord> OutputGamaRecord() throws IOException {
+        List<GameRecord> g = XmlUtil.GetGameRecord();
+        return g;
     }
 }

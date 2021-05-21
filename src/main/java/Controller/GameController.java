@@ -300,6 +300,8 @@ public class GameController {
         log.info("Resetting game...");
         stopWatchTimeline.stop();
         board.getChildren().clear();
+        steps = 0;
+        stepsLabel.setText(String.valueOf(steps));
         initialize();
     }
 
@@ -323,7 +325,7 @@ public class GameController {
         result.setPlayer(playerLabel.getText());
         result.setStep(steps);
         result.setPlaygame(stopWatchLabel.getText());
-        System.out.println(result.toString());
+        log.info("Game information" + result.toString());
         return result;
     }
 }

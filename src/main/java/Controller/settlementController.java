@@ -1,6 +1,9 @@
 package Controller;
 
+import Dao.GameRecordDao;
 import Entity.GameRecord;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Slf4j
 
@@ -25,25 +29,32 @@ public class settlementController {
     private TableView<GameRecord> RecordTable;
 
     @FXML
-    private TableColumn<GameRecord, String> player;
+    private TableColumn<GameRecord, String> Player;
 
     @FXML
-    private TableColumn<GameRecord, Integer> step;
+    private TableColumn<GameRecord, Integer> Step;
 
     @FXML
-    private TableColumn<GameRecord, Duration> playgame;
+    private TableColumn<GameRecord, String> Playgame;
 
     @FXML
-    private TableColumn<GameRecord, ZonedDateTime> Createtime;
+    private TableColumn<GameRecord, String> Createtime;
 
     @FXML
-    private void initialize(){
+    private void initialize() throws IOException {
         log.debug("Loading Play record...");
+        List<GameRecord> gameRecords = new  GameRecordDao().OutputGamaRecord();
 
-        player.setCellValueFactory(new PropertyValueFactory<>("player"));
-        step.setCellValueFactory(new PropertyValueFactory<>("steps"));
-        playgame.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        Createtime.setCellValueFactory(new PropertyValueFactory<>("created"));
+
+        Player.setCellValueFactory(new PropertyValueFactory<>("Player"));
+        Step.setCellValueFactory(new PropertyValueFactory<>("Step"));
+        Playgame.setCellValueFactory(new PropertyValueFactory<>("Playgame"));
+        Createtime.setCellValueFactory(new PropertyValueFactory<>("Createtime"));
+
+        ObservableList<GameRecord> observableResult = FXCollections.observableArrayList();
+        observableResult.addAll(gameRecords);
+
+        RecordTable.setItems(observableResult);
     }
 
 
