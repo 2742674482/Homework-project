@@ -4,21 +4,28 @@ import lombok.Data;
 
 
 
-/*
-游戏记录类，用于记录游戏产生的数据
-/
+/**
+ record the data by game.
  */
 @Data
 
 @JacksonXmlRootElement(localName = "Record")
 public class GameRecord {
-
-    public String Createtime;//创建时间
-
-    public String Player;//玩家\
-
+    /**
+     * create time.
+     */
+    public String Createtime;
+    /**
+     * player.
+     */
+    public String Player;//玩家
+    /**
+     * step.
+     */
     public int Step;//步数
-
+    /**
+     * the time of gameplay.
+     */
     public String Playgame;//游戏所用时长
 
 
